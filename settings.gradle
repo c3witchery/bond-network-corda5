@@ -1,0 +1,45 @@
+pluginManagement {
+    // Declare the repositories where plugins are stored.
+    repositories {
+        maven {
+            url "${artifactoryContextUrl}/corda-dev"
+            content {
+                includeGroupByRegex 'net\\.corda\\.plugins(\\..*)?'
+            }
+        }
+        gradlePluginPortal()
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://repo1.maven.org/maven2"
+        }
+        maven {
+            url = "$artifactoryContextUrl/"
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = settings.ext.find('cordaArtifactoryUsername') ?: "cesare.urso@r3.com"
+                password = settings.ext.find('cordaArtifactoryPassword') ?: "AKCp8mZHixc3KdzU1r9Q8dEBxoq6ZUyM4G19qA1CFou5jwQ3abzENtKzAxbu9xpGS2PbENZ25"
+            }
+        }
+    }
+
+    //  The plugin dependencies with versions of the plugins congruent with the specified CorDapp plugin version,
+    //  Corda API version, and Kotlin version.
+    plugins {
+        id 'net.corda.plugins.cordapp-cpk2' version cordaGradlePluginsVersion2
+        id 'net.corda.plugins.cordapp-cpb2' version cordaGradlePluginsVersion2
+        id 'net.corda.cordapp.cordapp-configuration' version cordaApiVersion
+        id 'net.corda.plugins.csde' version csdePluginVersion
+        id 'org.jetbrains.kotlin.jvm' version kotlinVersion
+        id 'org.jetbrains.kotlin.plugin.jpa' version kotlinVersion
+        id 'org.jetbrains.kotlin.plugin.allopen' version kotlinVersion
+    }
+}
+
+// Root project name, used in naming the project as a whole and used in naming objects built by the project.
+rootProject.name = 'csde-cordapp-template-kotlin'
+include ':workflows'
+include ':contracts'
+
