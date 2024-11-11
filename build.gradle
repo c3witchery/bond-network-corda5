@@ -82,8 +82,8 @@ allprojects {
                 basic(BasicAuthentication)
             }
             credentials {
-                username = findProperty('cordaArtifactoryUsername') ?: "cesare.urso@r3.com"
-                password = findProperty('cordaArtifactoryPassword') ?: "AKCp8mZHixc3KdzU1r9Q8dEBxoq6ZUyM4G19qA1CFou5jwQ3abzENtKzAxbu9xpGS2PbENZ25"
+                username = findProperty('cordaArtifactoryUsername') ?: ""
+                password = findProperty('cordaArtifactoryPassword') ?: ""
             }
         }
     }
